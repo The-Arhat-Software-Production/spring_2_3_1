@@ -1,8 +1,6 @@
 package web.dao;
 
 import web.model.User;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,21 +11,40 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
-//    @Autowired
-//    private SessionFactory sessionFactory;
-
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public void createUser(User user) {
-        //sessionFactory.getCurrentSession().save(user);
         entityManager.persist(user);
+        entityManager.flush();
+    }
+
+    @Override
+    public User readUser(long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
+        entityManager.flush();
+    }
+
+    @Override
+    public User deleteUser(long id) throws NullPointerException {
+        User user = readUser(id);
+        if (user != null) {
+            entityManager.remove(user);
+            entityManager.flush();
+            return user;
+        } else {
+            throw new NullPointerException("User with id " + id + " not found");
+        }
     }
 
     @Override
     public List<User> listUsers() {
-        //TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
         TypedQuery<User> query = entityManager.createQuery("from User", User.class);
         return query.getResultList();
     }
