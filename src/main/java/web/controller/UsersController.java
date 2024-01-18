@@ -24,6 +24,7 @@ public class UsersController {
         this.userService = userService;
     }
 
+    // CREATE
     // форма создания пользователя
     @GetMapping({"/new"})
     public String newUser(Model model) {
@@ -31,10 +32,34 @@ public class UsersController {
         return "createUser";
     }
 
-    // обработка POST данных из формы
+    // обработка POST данных из формы создания пользователя
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") User user) {
         userService.createUser(user);
+        return "redirect:/users";
+    }
+
+    // READ
+    @GetMapping("/details/{id}")
+    public String getUserDetails(@PathVariable("id") Long id, Model model) {
+        User user = userService.readUser(id);
+        model.addAttribute("user", user);
+        return "readUser"; // Имя представления для отображения подробной информации о пользователе
+    }
+
+    // UPDATE
+    // форма редактирования пользователя
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+        User user = userService.readUser(id);
+        model.addAttribute("user", user);
+        return "updateUser";
+    }
+
+    // обработка POST данных из формы редактирования пользователя
+    @PostMapping("/save")
+    public String saveUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/users";
     }
 

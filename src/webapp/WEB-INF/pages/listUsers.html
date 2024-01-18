@@ -12,10 +12,29 @@
         <tbody>
         <th:block th:each="user : ${users}">
             <tr>
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{/users/details/{id}(id=${user.id})}">
+                        <span th:text="${user.id}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/users/details/{id}(id=${user.id})}">
+                        <span th:text="${user.firstName}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/users/details/{id}(id=${user.id})}">
+                        <span th:text="${user.lastName}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/users/details/{id}(id=${user.id})}">
+                        <span th:text="${user.email}"></span>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
+                </td>
                 <td>
                     <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
                 </td>
