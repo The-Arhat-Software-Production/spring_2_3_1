@@ -1,0 +1,27 @@
+<th:block th:include="header.html"></th:block>
+<div class="container table-container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+<th:block th:include="footer.html"></th:block>
