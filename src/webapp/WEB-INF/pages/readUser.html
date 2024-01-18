@@ -1,14 +1,16 @@
 <th:block th:include="header.html"></th:block>
 <div class="container user-details">
     <h2>User Details</h2>
-    <div>
-        <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
-        <p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
-        <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
-    </div>
-    <div>
-        <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
-        <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+    <div class="user-card">
+        <div class="user-info">
+            <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+            <p><strong>First Name:</strong> <span th:text="${user.firstName}"></span></p>
+            <p><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></p>
+        </div>
+        <div class="user-actions">
+            <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+        </div>
     </div>
 </div>
 <th:block th:include="footer.html"></th:block>

@@ -33,17 +33,21 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return new String[]{"/"};
     }
 
+    /* Метод для настройки и регистрации фильтров в контексте сервлета при запуске приложения */
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
 
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+
         FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("characterEncodingFilter",
                 new CharacterEncodingFilter("UTF-8", true, true));
+
         filterRegistration.addMappingForUrlPatterns(null, false, "/*");
         filterRegistration = servletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter() );
         filterRegistration.addMappingForUrlPatterns(null, false, "/*");
-
-        //servletContext.addListener(AppContextListener.class);
     }
 
 }

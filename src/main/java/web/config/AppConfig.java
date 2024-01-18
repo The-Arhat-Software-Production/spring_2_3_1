@@ -45,6 +45,8 @@ public class AppConfig {
       props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
       props.put("hibernate.connection.charsetEncoding", env.getProperty("hibernate.connection.charsetEncoding", "UTF-8"));
       props.put("hibernate.connection.charSet", env.getProperty("hibernate.connection.charSet", "UTF-8"));
+      props.put("hibernate.connection.characterEncoding", env.getProperty("hibernate.connection.characterEncoding", "UTF-8"));
+      props.put("hibernate.connection.useUnicode", env.getProperty("hibernate.connection.useUnicode"));
 
       factoryBean.setHibernateProperties(props);
       factoryBean.setAnnotatedClasses(User.class);

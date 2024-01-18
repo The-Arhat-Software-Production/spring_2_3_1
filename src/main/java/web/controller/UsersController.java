@@ -44,7 +44,7 @@ public class UsersController {
     public String getUserDetails(@PathVariable("id") Long id, Model model) {
         User user = userService.readUser(id);
         model.addAttribute("user", user);
-        return "readUser"; // Имя представления для отображения подробной информации о пользователе
+        return "readUser";
     }
 
     // UPDATE
@@ -63,11 +63,12 @@ public class UsersController {
         return "redirect:/users";
     }
 
+    // DELETE
     // удалить пользователя по id
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/users"; // Перенаправление обратно на список пользователей
+        return "redirect:/users";
     }
 
     // выводим всех пользователей
