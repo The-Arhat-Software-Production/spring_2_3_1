@@ -50,7 +50,8 @@ public class AppConfig {
       props.put("hibernate.connection.useUnicode", env.getProperty("hibernate.connection.useUnicode"));
 
       factoryBean.setHibernateProperties(props);
-      factoryBean.setAnnotatedClasses(User.class);
+      //factoryBean.setAnnotatedClasses(User.class);
+      factoryBean.setPackagesToScan("web.model"); // Указываем пакет для сканирования классов сущностей
       return factoryBean;
    }
 

@@ -12,6 +12,7 @@ import java.util.List;
 public class UserDaoImp implements UserDao {
 
     @PersistenceContext
+    // интерфейс, который предоставляет API для взаимодействия с БД через JPA (Java Persistence API)
     private EntityManager entityManager;
 
     @Override
@@ -36,6 +37,7 @@ public class UserDaoImp implements UserDao {
         User user = readUser(id);
         if (user != null) {
             entityManager.remove(user);
+            // принудительно применяет изменения к БД
             entityManager.flush();
             return user;
         } else {
@@ -45,6 +47,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> listUsers() {
+        // Создаем объект query, который представляет собой запрос JPA для выборки всех
+        // записей из таблицы User и приведения результатов к типу User
         TypedQuery<User> query = entityManager.createQuery("from User", User.class);
         return query.getResultList();
     }
