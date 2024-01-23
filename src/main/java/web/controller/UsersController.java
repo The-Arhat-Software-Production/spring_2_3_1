@@ -14,7 +14,7 @@ import web.service.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/users") // префикс для всех методов в классе
 public class UsersController {
 
     private final UserService userService;
